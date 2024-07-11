@@ -1,3 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	.font-primary {
+		font-family: 'Montserrat', sans-serif;
+	}
+
+	.font-secondary {
+		font-family: 'Montserrat Alternates', sans-serif;
+	}
+
+	body {
+		@apply bg-background text-[#F5F5F5];
+	}
+
+	::selection {
+		@apply bg-white/50;
+	}
+}
+
+@layer utilities {
+	.modal {
+		@apply fixed top-0 left-0 w-full h-full bg-black/50 backdrop-blur z-[100];
+
+		.modal-close {
+			@apply absolute top-0 left-0 w-full h-full z-[101] bg-black/0;
+		}
+
+		.modal-content {
+			@apply bg-backgroundSecondary border border-border rounded-xl min-w-[300px] px-8 py-6
+			z-[102] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col gap-2;
+		}
+	}
+
+	input {
+		@apply bg-backgroundThird text-sm font-medium px-4 py-2 rounded-lg appearance-none outline-none focus:outline-none #{!important};
+		@apply border border-black/0 focus:border-borderActive transition;
+	}
+
+	.btn-primary {
+		@apply bg-backgroundThird p-[8px] h-[40px] text-[18px] font-medium flex justify-center items-center gap-[10px] rounded-[10px] transition;
+		@apply hover:opacity-80 active:opacity-60;
+	}
+}
