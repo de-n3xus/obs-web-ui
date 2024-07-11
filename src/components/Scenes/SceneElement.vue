@@ -20,14 +20,18 @@ const props = defineProps({
 })
 
 const updateScenes = inject('updateScenes')
+const previewUuid = inject('previewUuid')
 const editName = ref(false)
 const nameModel = ref(props.name)
+
+previewUuid.value = props.uuid
 
 const setScene = async () => {
 	await client.call('SetCurrentProgramScene', {
 		sceneUuid: props.uuid,
 	})
 
+	previewUuid.value = props.uuid
 	updateScenes.value = true
 }
 

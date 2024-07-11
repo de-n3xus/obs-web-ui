@@ -7,12 +7,14 @@ const scenes = ref({})
 const current = ref('')
 
 const updateScenes = inject('updateScenes')
+const previewUuid = inject('previewUuid')
 
 const getScenes = async () => {
 	client.call('GetSceneList')
 		.then(data => {
 			scenes.value = data
 			current.value = data.currentProgramSceneUuid
+			previewUuid.value = current.value
 		})
 }
 

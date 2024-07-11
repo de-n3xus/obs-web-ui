@@ -2,9 +2,13 @@
 import ScenesLayout from "./Scenes/ScenesLayout.vue"
 import ControlLayout from "./Control/ControlLayout.vue"
 import { computed, onMounted, onUnmounted, provide, ref } from "vue"
+import Preview from "./preview.vue"
 
 const updateScenes = ref(false)
 provide('updateScenes', updateScenes)
+
+const previewUuid = ref('')
+provide('previewUuid', previewUuid)
 
 const points = ref(new Array(16).fill(0).map(() => [Math.random(), Math.random()]))
 
@@ -28,23 +32,30 @@ onMounted(() => {
 	jumpPoints()
 	onUnmounted(() => clearTimeout(timeout))
 })
+
+const showPreview = ref(false)
+provide('showPreview', showPreview)
 </script>
 
 <template>
-	<div class="max-w-screen-2xl w-full mx-auto px-4 relative">
-		<div class="min-h-screen h-full py-4 min-[500px]:py-20 px-4 min-[500px]:px-16 flex flex-col justify-between items-center">
-			<div></div>
-			<ScenesLayout />
+	<div class="flex flex-col gap-4">
+		<div class="max-w-screen-2xl w-full mx-auto px-4 relative">
+			<div class="min-h-screen h-full py-4 min-[500px]:py-20 px-4 min-[500px]:px-16 flex flex-col justify-between items-center">
+				<div></div>
+				<ScenesLayout />
 
-			<ControlLayout />
+				<ControlLayout />
+			</div>
+
+			<div class="bg absolute inset-0 -z-[1] transform-gpu blur-3xl overflow-hidden" aria-hidden="true">
+				<div
+					class="aspect-[1.7] h-full w-full bg-gradient-to-r from-cyan-400 to-white/10 lg:opacity-30 xs:opacity-50"
+					:style="{ 'clip-path': `polygon(${poly})` }"
+				/>
+			</div>
 		</div>
 
-		<div class="bg absolute inset-0 -z-[1] transform-gpu blur-3xl overflow-hidden" aria-hidden="true">
-			<div
-				class="aspect-[1.7] h-full w-full bg-gradient-to-r from-cyan-400 to-white/10 lg:opacity-30 xs:opacity-50"
-				:style="{ 'clip-path': `polygon(${poly})` }"
-			/>
-		</div>
+		<Preview v-if="showPreview" />
 	</div>
 </template>
 

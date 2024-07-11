@@ -1,17 +1,16 @@
 <script setup>
-import { onMounted, onUnmounted, ref } from "vue"
+import { inject, onMounted, onUnmounted, ref } from "vue"
 import client from "../utils/client.js"
-import { useRoute } from "vue-router"
 
 const imageData = ref('')
-const uuid = useRoute().params.uuid
+const uuid = inject('previewUuid')
 
 let updateInterval = null
 
 const getImageData = () => {
 	client.call('GetSourceScreenshot', {
-		imageFormat: 'webp',
-		sourceUuid: uuid,
+		imageFormat: 'jpg',
+		sourceUuid: uuid.value,
 	}).then(data => imageData.value = data.imageData)
 }
 

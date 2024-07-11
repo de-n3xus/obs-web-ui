@@ -8,6 +8,7 @@ import ActionProfile from "./actions/ActionProfile.vue"
 import ActionSceneCollection from "./actions/ActionSceneCollection.vue"
 import ActionVirtualCam from "./actions/ActionVirtualCam.vue"
 import cn from "../../utils/cn.js"
+import ActionOpenPreview from "./actions/ActionOpenPreview.vue"
 
 let heartbeatInterval = null
 const heartbeat = ref({})
@@ -51,6 +52,8 @@ onMounted(() => {
 			<ActionSceneCollection />
 
 			<ActionVirtualCam />
+
+			<ActionOpenPreview />
 
 			<ActionFullscreen />
 		</div>
