@@ -3,17 +3,19 @@ import config from "../config.js"
 import { toast } from "vue-sonner"
 
 const obs = new OBSWebSocket()
-let isConnected = false
+let isConnected = false;
 
-if (!isConnected) {
-	await obs.connect(config.host, config.password.toString(), {
-		rpcVersion: 1,
-	}).catch(error => {
-		console.error(error)
-	})
+(async () => {
+	if (!isConnected) {
+		await obs.connect(config.host, config.password.toString(), {
+			rpcVersion: 1,
+		}).catch(error => {
+			console.error(error)
+		})
 
-	isConnected = true
-}
+		isConnected = true
+	}
+})()
 
 obs.on('ConnectionClosed', () => {
 	isConnected = false

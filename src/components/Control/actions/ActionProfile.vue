@@ -6,6 +6,7 @@ import { onClickOutside } from '@vueuse/core'
 import cn from "../../../utils/cn.js"
 
 const updateScenes = inject('updateScenes')
+const updateHeartbeat = inject('updateHeartbeat')
 
 const profiles = ref([])
 const currentProfile = ref('')
@@ -23,6 +24,7 @@ const getProfiles = () => {
 			profiles.value = data.profiles || []
 			currentProfile.value = data.currentProfileName || ''
 			updateScenes.value = true
+			updateHeartbeat.value = true
 		})
 }
 
@@ -32,11 +34,13 @@ onMounted(() => {
 	client.on('CurrentProfileChanged', (data) => {
 		currentProfile.value = data.profileName || ''
 		updateScenes.value = true
+		updateHeartbeat.value = true
 	})
 
 	client.on('ProfileListChanged', (data) => {
 		profiles.value = data.profiles || []
 		updateScenes.value = true
+		updateHeartbeat.value = true
 	})
 
 	client.on('CurrentProfileChanged', () => {
@@ -52,6 +56,7 @@ const setProfile = (profile) => {
 	})
 
 	updateScenes.value = true
+	updateHeartbeat.value = true
 }
 </script>
 
@@ -67,12 +72,14 @@ const setProfile = (profile) => {
 			{{ currentProfile }}
 		</button>
 
-		<div class="absolute bottom-11 left-0 bg-backgroundThird flex flex-col items-start gap-0 text-sm font-medium"
+		<div class="absolute bottom-11 left-0 bg-[#979797]/5 backdrop-blur-sm flex flex-col gap-2 items-start p-[10px] text-sm font-medium"
 		     :class="cn('rounded-lg min-w-fit border border-borderSecondary text-left')"
 		     v-if="showDropdown"
 		>
 			<template v-for="profile in profiles">
-				<button @click="setProfile(profile)" class="hover:bg-backgroundSecondary px-4 py-2 transition w-full">
+				<button @click="setProfile(profile)"
+				        class="w-full p-[8px] font-medium leading-none bg-backgroundThird rounded-[8px] whitespace-nowrap hover:bg-opacity-80"
+				>
 					{{ profile }}
 				</button>
 			</template>

@@ -78,7 +78,7 @@ const setProfile = (scene) => {
 		>
 			<template v-for="scene in collections">
 				<button @click="setProfile(scene)"
-				        class="w-full p-[8px] font-medium leading-none bg-backgroundThird rounded-[8px]"
+				        class="w-full p-[8px] font-medium leading-none bg-backgroundThird rounded-[8px] whitespace-nowrap hover:bg-opacity-80"
 				>
 					{{ scene }}
 				</button>
