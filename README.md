@@ -16,3 +16,10 @@ export default {
 If you want open this on second device in your network, open cmd and type `ipconfig`
 
 Then take IPv4 Address, in my situation this is 192.168.43.58 and put it in config
+
+Then build project - 
+```shell
+yarn install
+yarn build
+```
+and run it on any webserver idk its your problem next
