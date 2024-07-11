@@ -1,5 +1,5 @@
 <script setup>
-import { inject, onMounted, onUnmounted, provide, ref, watch } from "vue"
+import { inject, onMounted, onUnmounted, provide, ref, watch, computed } from "vue"
 import client from "../../utils/client.js"
 import SceneElement from "./SceneElement.vue"
 
@@ -32,7 +32,7 @@ onMounted(() => {
 </script>
 
 <template>
-	<div>
+	<div class="relative">
 		<div class="flex justify-center items-center flex-wrap gap-x-6 gap-y-4 w-full">
 			<template v-for="scene in scenes.scenes">
 				<SceneElement :uuid="scene.sceneUuid"

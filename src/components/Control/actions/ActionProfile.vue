@@ -17,13 +17,17 @@ onClickOutside(target, () => {
 	showDropdown.value = false
 })
 
-onMounted(() => {
+const getProfiles = () => {
 	client.call('GetProfileList')
 		.then(data => {
 			profiles.value = data.profiles || []
 			currentProfile.value = data.currentProfileName || ''
 			updateScenes.value = true
 		})
+}
+
+onMounted(() => {
+	getProfiles()
 
 	client.on('CurrentProfileChanged', (data) => {
 		currentProfile.value = data.profileName || ''
@@ -33,6 +37,10 @@ onMounted(() => {
 	client.on('ProfileListChanged', (data) => {
 		profiles.value = data.profiles || []
 		updateScenes.value = true
+	})
+
+	client.on('CurrentProfileChanged', () => {
+		getProfiles()
 	})
 })
 

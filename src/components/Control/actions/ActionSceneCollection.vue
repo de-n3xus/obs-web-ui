@@ -17,13 +17,17 @@ onClickOutside(target, () => {
 	showDropdown.value = false
 })
 
-onMounted(() => {
+const getScenes = () => {
 	client.call('GetSceneCollectionList')
 		.then(data => {
 			collections.value = data.sceneCollections || []
 			currentCollection.value = data.currentSceneCollectionName || ''
 			updateScenes.value = true
 		})
+}
+
+onMounted(() => {
+	getScenes()
 
 	client.on('CurrentSceneCollectionChanged', (data) => {
 		currentCollection.value = data.sceneCollectionName || ''
@@ -33,6 +37,15 @@ onMounted(() => {
 	client.on('SceneCollectionListChanged', (data) => {
 		collections.value = data.sceneCollections || []
 		updateScenes.value = true
+	})
+
+	client.on('CurrentSceneChanged', () => {
+		client.call('GetSceneCollectionList')
+			.then(data => {
+				collections.value = data.sceneCollections || []
+				currentCollection.value = data.currentSceneCollectionName || ''
+				updateScenes.value = true
+			})
 	})
 })
 
@@ -59,12 +72,14 @@ const setProfile = (scene) => {
 			{{ currentCollection }}
 		</button>
 
-		<div class="absolute bottom-11 left-0 bg-backgroundThird flex flex-col items-start gap-0 text-sm font-medium"
+		<div class="absolute bottom-11 left-0 bg-[#979797]/5 backdrop-blur-sm flex flex-col gap-2 items-start p-[10px] text-sm font-medium"
 		     :class="cn('rounded-lg min-w-fit border border-borderSecondary text-left')"
 		     v-if="showDropdown"
 		>
 			<template v-for="scene in collections">
-				<button @click="setProfile(scene)" class="hover:bg-backgroundSecondary px-4 py-2 transition w-full">
+				<button @click="setProfile(scene)"
+				        class="w-full p-[8px] font-medium leading-none bg-backgroundThird rounded-[8px]"
+				>
 					{{ scene }}
 				</button>
 			</template>
