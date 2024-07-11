@@ -1,3 +1,5 @@
+<img src="public/preview.png" alt="PREVIEW" />
+
 # Installation
 
 Before you need install https://github.com/obsproject/obs-websocket
