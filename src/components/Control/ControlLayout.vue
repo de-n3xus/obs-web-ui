@@ -6,6 +6,8 @@ import ActionRecord from "./actions/ActionRecord.vue"
 import ActionFullscreen from "./actions/ActionFullscreen.vue"
 import ActionProfile from "./actions/ActionProfile.vue"
 import ActionSceneCollection from "./actions/ActionSceneCollection.vue"
+import ActionVirtualCam from "./actions/ActionVirtualCam.vue"
+import cn from "../../utils/cn.js"
 
 let heartbeatInterval = null
 const heartbeat = ref({})
@@ -36,8 +38,10 @@ onMounted(() => {
 
 <template>
 	<div class="flex flex-col gap-2">
-		<div
-			class="flex justify-center items-center gap-[10px] bg-backgroundSecondary px-[12px] py-[10px] border border-border rounded-[14px] w-fit mx-auto"
+		<div :class="cn(
+			'flex justify-center items-center flex-wrap gap-[10px] bg-backgroundSecondary',
+				'px-[12px] py-[10px] border border-border rounded-[14px] w-fit mx-auto'
+			)"
 		>
 			<!-- <ActionLive /> -->
 			<ActionRecord />
@@ -45,6 +49,8 @@ onMounted(() => {
 			<ActionProfile />
 
 			<ActionSceneCollection />
+
+			<ActionVirtualCam />
 
 			<ActionFullscreen />
 		</div>

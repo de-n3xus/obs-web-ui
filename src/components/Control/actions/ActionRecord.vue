@@ -35,7 +35,7 @@ const heartbeat = inject('heartbeat')
 		        @click="client.call('StopRecord'); updateHeartbeat = true"
 		>
 			<Icon icon="bi:stop-fill"
-			      class="size-6 group-hover:text-red-500"
+			      class="size-6 text-blue-500 group-hover:text-red-500"
 			/>
 
 			{{ formatTime(heartbeat?.recording?.outputDuration) }}

@@ -9,7 +9,7 @@ provide('updateScenes', updateScenes)
 
 <template>
 	<div class="max-w-screen-2xl w-full mx-auto px-4">
-		<div class="min-h-screen h-full py-20 px-16 flex flex-col justify-between items-center">
+		<div class="min-h-screen h-full py-4 min-[500px]:py-20 px-4 min-[500px]:px-16 flex flex-col justify-between items-center">
 			<div></div>
 			<ScenesLayout />
 

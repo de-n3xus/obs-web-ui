@@ -33,7 +33,7 @@ onMounted(() => {
 
 <template>
 	<div>
-		<div class="flex justify-center items-center gap-x-6 gap-y-4 w-full">
+		<div class="flex justify-center items-center flex-wrap gap-x-6 gap-y-4 w-full">
 			<template v-for="scene in scenes.scenes">
 				<SceneElement :uuid="scene.sceneUuid"
 				              :name="scene.sceneName"

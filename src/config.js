@@ -1,4 +1,4 @@
 export default {
-	host: 'ws://localhost:4455',
+	host: 'ws://192.168.43.58:4455',
 	password: 123123,
 }
